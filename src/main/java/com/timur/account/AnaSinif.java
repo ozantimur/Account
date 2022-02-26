@@ -2,8 +2,7 @@ package com.timur.account;
 
 import com.timur.account.model.Kullanici;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -35,7 +34,7 @@ public class AnaSinif {
                     login();
                     break;
                 case 2: // sign up
-                    // TODO: doldur
+                    signup();
                     break;
                 default:
                     System.out.println("Lütfen doğru seçim yapınız!");
@@ -99,7 +98,7 @@ public class AnaSinif {
         try {
 
             // dosyayı açıp okuyoruz
-            BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/users.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\ozant\\Desktop\\Java\\Account\\src\\main\\resources\\users.txt"));
 
             // dosyadaki her bir satırı tek tek dönüyoruz
             for (String line; (line = reader.readLine()) != null; ) { // line -> Mehmet Akşahin;maksahin;1234
@@ -131,4 +130,48 @@ public class AnaSinif {
         }
     }
 
+    public static void signup() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Isim-Soyad: ");
+            String name = scanner.nextLine();
+            String username = thisUsernameAlreadyExists();
+            System.out.println("Sifre: ");
+            String password = scanner.nextLine();
+
+            bilgiYazdirma(name, username, password);
+
+
+        } catch (Exception e) {
+            System.out.println("Bir hata olustu: " + e);
+        }
+    }
+
+    public static void bilgiYazdirma(String name, String username, String password) {
+        try {
+            File file = new File("C:\\Users\\ozant\\Desktop\\Java\\Account\\src\\main\\resources\\users.txt");
+            FileWriter fr = new FileWriter(file, true);
+            BufferedWriter br = new BufferedWriter(fr);
+            br.write("\n" + name + ";" + username + ";" + password);
+
+            br.close();
+            fr.close();
+
+        } catch (IOException e) {
+            //exception handling left as an exercise for the reader
+        }
+    }
+
+    public static String thisUsernameAlreadyExists() {
+        System.out.println("Kullanici adi: ");
+        Scanner scanner = new Scanner(System.in);
+        String username = scanner.nextLine();
+        for (Kullanici kullanici : kullaniciList) {
+            if (kullanici.getKullaniciAdi().equals(username)) {
+                System.out.println("exists");
+                break;
+            }
+        }
+        return username;
+    }
 }

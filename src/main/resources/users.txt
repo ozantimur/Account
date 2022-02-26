@@ -1,2 +1,3 @@
-Mehmet Akşahin;maksahin;1234
-Ozan Timur;ozant;9876
+ozan;timurco;1234
+fake hesap;fakehesap;1234
+oz;timurco;12
