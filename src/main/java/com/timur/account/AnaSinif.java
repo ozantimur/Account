@@ -132,6 +132,8 @@ public class AnaSinif {
 
     public static void signup() {
         try {
+            dosyayiOkuVeListeyiDoldur();
+
             Scanner scanner = new Scanner(System.in);
             System.out.println("Isim-Soyad: ");
             String name = scanner.nextLine();
@@ -158,20 +160,30 @@ public class AnaSinif {
             fr.close();
 
         } catch (IOException e) {
-            //exception handling left as an exercise for the reader
+            System.out.println("Hata :" + e);
         }
     }
 
     public static String thisUsernameAlreadyExists() {
-        System.out.println("Kullanici adi: ");
-        Scanner scanner = new Scanner(System.in);
-        String username = scanner.nextLine();
-        for (Kullanici kullanici : kullaniciList) {
-            if (kullanici.getKullaniciAdi().equals(username)) {
-                System.out.println("exists");
-                break;
+        String username = null;
+        try {
+            System.out.println("Kullanici adi: ");
+            Scanner scanner = new Scanner(System.in);
+            username = scanner.nextLine();
+            for (Kullanici kullanici : kullaniciList) {
+                if (kullanici.getKullaniciAdi().equals(username)) {
+                    System.out.println("Bu kullanici adi baskasi tarafindan kullaniliyor\\nLutfen baska bir tane seciniz");
+                    System.out.println("Kullanici adi: ");
+                    scanner = new Scanner(System.in);
+                    String newUsername = scanner.nextLine();
+                    thisUsernameAlreadyExists();
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Hata: " + e);
+        } finally {
+            return username;
         }
-        return username;
     }
+
 }
