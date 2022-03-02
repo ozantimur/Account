@@ -1,4 +1,6 @@
 ozan;timurco;1234
 fake hesap;fakehesap;1234
-oz;timurco;12
-ozan;timurco;30303
+oz;ozoz;12
+ozan;ozan;30303
+Mehmet Aksahin;maksahin;123456
+Murtaza TİMUR;murtazco;9876
